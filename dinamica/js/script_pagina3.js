@@ -19,16 +19,28 @@ $(document).ready(function() {
         var assunto = prompt('digite o assunto que deseja mover para a lista de assuntos que já aprendeu!');
         if(assunto == "") return;
 
-        var item = $('#menuAprender .list-group-item:contains("' + assunto + '")');
+        var item = $('#menuAprender .list-group-item').filter(function(i, el) {
+            return $(el).text() === assunto;
+        });
+
         $("#menuAprendido").append(item);
     });
 
     $("#removerbtn").click(function() {
+
+        confirm("Atenção, o botão 'remover' vale para ambos os menus.");
         var assunto = prompt('digite o assunto que deseja remover da lista de assuntos que deseja aprender!');
         if(assunto == "") return;
 
-        var item = $('#menuAprender .list-group-item:contains("' + assunto + '")');
+        var item = $('#menuAprender .list-group-item').filter(function(i, el) {
+            return $(el).text() === assunto;
+        });
+        var item2 = $('#menuAprendido .list-group-item').filter(function(i, el) {
+            return $(el).text() === assunto;
+        });
+
         $(item).remove();
+        $(item2).remove();
 
 
     });
